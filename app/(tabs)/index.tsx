@@ -1,61 +1,56 @@
+import { MyItemForm } from "@/components/form/MyItemForm";
 import MyCard from "@/components/MyCard";
 import MyModal from "@/components/MyModal";
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { Button, IconButton, Text, TextInput, useTheme } from "react-native-paper";
+import { getSecure } from "@/main/secure-store";
+import { deleteItem, getAllItems } from "@/main/storage";
+import { ItemsInterface } from "@/types/items.type";
+import { useEffect, useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import {  IconButton, Text,  useTheme } from "react-native-paper";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-interface FormInterface {
-  key: string;
-  password: string;
-}
-
-const MyForm = () => {
-  const intial = {
-    key: "", password: ""
-  }
-  const theme = useTheme();
-  const [form, setform] = useState<FormInterface>(intial)
-  const [hidepass, setHidePass] = useState<boolean>(true);
-  const handleSubmit = () => {
-    if (!form.key || !form.password) alert("All input is required")
-  }
-  return (
-    <View style={{
-      gap: 20, backgroundColor: theme.colors.background,
-      margin: 20, padding: 12, borderRadius: 12
-    }}>
-      <View style={{ gap: 3 }}>
-        <TextInput
-          label="Enter Title"
-          mode="outlined"
-          value={form.key}
-          onChangeText={text => setform({ ...form, key: text })}
-        />
-        <TextInput
-          label="Enter Password"
-          mode="outlined"
-          value={form.password}
-          secureTextEntry={hidepass}
-          right={<TextInput.Icon onPress={() => setHidePass(!hidepass)} icon={hidepass ? "eye" : "eye-off"} />}
-          onChangeText={text => setform({ ...form, password: text })}
-        />
-      </View>
-      <Button onPress={handleSubmit} mode="contained">Save</Button>
-    </View>
-  )
-}
 
 export default function Index() {
+  const theme = useTheme();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [data, setData] = useState<ItemsInterface[]>([]);
+  const [openItem, setOpenitem] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  useEffect(() => {
+    (async () => {
+      const items = await getAllItems();
+      setData(items);
+    })()
+  }, [isOpen]);
+  const closefunction = () => setIsOpen(false);
+  const onOpen = async (item: ItemsInterface) => {
+    const res = await getSecure(item.securekey);
+    if (res) {
+      setOpenitem(item.securekey);
+      setPassword(res);
+    }
+  }
+  const onDelete = async (id: number) => {
+    const res = await deleteItem(id);
+    alert(res.message);
+    setData(data.filter(item => item.id !== id))
+  }
   return (
     <SafeAreaView style={styles.container}>
       <MyModal
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={closefunction}
       >
-        <MyForm />
+        <MyItemForm onClose={() => { closefunction(); }} />
+      </MyModal>
+      <MyModal
+        isOpen={openItem !== ""}
+        onClose={() => setOpenitem("")}
+      >
+        <View style={{ margin: 12, padding: 12, backgroundColor: theme.colors.background }}>
+          <Text>Password : {password}</Text>
+        </View>
       </MyModal>
       <View style={{ justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
         <Text variant="headlineMedium" >All Saved Password</Text>
@@ -66,7 +61,11 @@ export default function Index() {
           onPress={() => setIsOpen(true)}
         />
       </View>
-      <MyCard title="Password" date="12 june, 2012" />
+      <FlatList
+        data={data}
+        renderItem={(({ item }) => <MyCard onDelete={() => onDelete(item.id)} onOpen={() => onOpen(item)} data={item} />)}
+      />
+
     </SafeAreaView>
   );
 }

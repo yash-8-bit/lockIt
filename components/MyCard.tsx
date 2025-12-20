@@ -1,24 +1,23 @@
+import { ItemsInterface } from '@/types/items.type';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { IconButton } from 'react-native-paper';
-interface MyCardInterface {
-  title: string,
-  date: string,
-}
+import { Button } from 'react-native-paper';
 
-export default function MyCard({ title, date }: MyCardInterface) {
+
+export default function MyCard({ data, onOpen, onDelete }: {
+  data: ItemsInterface,
+  onOpen: () => void;
+  onDelete: () => void;
+}) {
+
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.date}>{date}</Text>
-      </View>
       <View>
-        <IconButton
-          icon="eye"
-          size={20}
-          onPress={() => { }}
-        />
+        <Text style={styles.title}>{data.title}</Text>
+      </View>
+      <View style={{ flexDirection: "row", gap: 2 }}>
+        <Button onPress={onOpen} mode="contained" style={{ flex: 1 }} >View</Button>
+        <Button onPress={onDelete} mode="contained" style={{ flex: 1 }}>Delete</Button>
       </View>
     </View>
   )
@@ -31,10 +30,11 @@ const styles = StyleSheet.create({
     padding: 6,
     borderRadius: 4,
     borderColor: "gray",
-    flexDirection: "row"
+    marginVertical: 6
   },
   title: {
-    fontSize: 26
+    fontSize: 26,
+
   },
   date: {
     fontSize: 12

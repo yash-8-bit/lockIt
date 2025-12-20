@@ -1,10 +1,11 @@
-export const TryCatchFunction = (callback: Function,
+export  const TryCatchFunction = async(callback: Function,
     onerror?: Function
 ) => {
     try {
-        callback();
+        const result = await callback();
+        return result;
     }
     catch (err) {
-        onerror?.();
+       return onerror?.();
     }
 }

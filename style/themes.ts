@@ -4,8 +4,7 @@ export const myLightTheme : MD3Theme= {
   ...MD3LightTheme,
   colors: {
     ...MD3LightTheme.colors,
-    primary: '#8ABEB9',
-    
+    primary: '#8ABEB9'
   },
    roundness : 1
 };
