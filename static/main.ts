@@ -1,0 +1,1 @@
+export const about_para = "This app helps you safely store and manage your passwords in one place. It is designed to be simple and easy to use, so you can quickly access your saved information whenever you need it. The goal of this app is to make password management more secure and convenient."

@@ -1,7 +1,10 @@
+import { myFont } from '@/style/font';
 import { ItemsInterface } from '@/types/items.type';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import {  Text } from 'react-native-paper';
+import MyButton from './MyButton';
+import { useMyTheme } from '@/provider/MyThemeProvider';
 
 
 export default function MyCard({ data, onOpen, onDelete }: {
@@ -9,15 +12,15 @@ export default function MyCard({ data, onOpen, onDelete }: {
   onOpen: () => void;
   onDelete: () => void;
 }) {
-
+  const theme = useMyTheme();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{borderColor : theme?.isLight ? "gray":"white"}]}>
       <View>
         <Text style={styles.title}>{data.title}</Text>
       </View>
       <View style={{ flexDirection: "row", gap: 2 }}>
-        <Button onPress={onOpen} mode="contained" style={{ flex: 1 }} >View</Button>
-        <Button onPress={onDelete} mode="contained" style={{ flex: 1 }}>Delete</Button>
+        <MyButton  onPress={onOpen} icon={"lock-open"} label='View' />
+        <MyButton onPress={onDelete} icon={"delete"} label='Delete' />
       </View>
     </View>
   )
@@ -29,14 +32,11 @@ const styles = StyleSheet.create({
     borderWidth: 0.2,
     padding: 6,
     borderRadius: 4,
-    borderColor: "gray",
     marginVertical: 6
   },
   title: {
-    fontSize: 26,
-
-  },
-  date: {
-    fontSize: 12
+    fontSize: 22,
+   ...myFont,
+   marginBottom : 2
   }
 })

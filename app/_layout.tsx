@@ -7,10 +7,10 @@ import { PaperProvider } from 'react-native-paper';
 const Layout = () => {
   const theme = useMyTheme();
   return (
-    <PaperProvider theme={theme?.isLight ? myLightTheme : myDarkTheme}>
+    <PaperProvider  theme={theme?.isLight ? myLightTheme : myDarkTheme}>
      <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
+          <Stack.Screen  name="(tabs)" options={{ headerShown: false }} />
+        </Stack> 
     </PaperProvider>
   )
 }

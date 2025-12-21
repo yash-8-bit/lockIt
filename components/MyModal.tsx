@@ -10,8 +10,8 @@ interface MyModalInterface extends PropsWithChildren {
 function MyModal({ isOpen, onClose, children }: MyModalInterface) {
 
     return (
-        <Portal>
-            <Modal visible={isOpen} onDismiss={onClose} >
+        <Portal >
+            <Modal  visible={isOpen} onDismiss={onClose} >
                 {children}
             </Modal>
         </Portal>

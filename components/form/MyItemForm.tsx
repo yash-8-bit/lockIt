@@ -1,5 +1,6 @@
 
 import { setItemforKey } from "@/main/storage";
+import { myFont } from "@/style/font";
 import { generatekey } from "@/utils/generatekey.util";
 import { useState } from "react";
 import { View } from "react-native";
@@ -35,6 +36,8 @@ export const MyItemForm = ({ onClose }: { onClose: () => void }) => {
         <TextInput
           label="Enter Title"
           mode="outlined"
+          contentStyle={{ ...myFont }}
+
           value={form.title}
           onChangeText={text => setform({ ...form, title: text })}
         />
@@ -42,12 +45,13 @@ export const MyItemForm = ({ onClose }: { onClose: () => void }) => {
           label="Enter Password"
           mode="outlined"
           value={form.password}
+          contentStyle={{ ...myFont }}
           secureTextEntry={hidepass}
           right={<TextInput.Icon onPress={() => setHidePass(!hidepass)} icon={hidepass ? "eye" : "eye-off"} />}
           onChangeText={text => setform({ ...form, password: text })}
         />
       </View>
-      <Button onPress={handleSubmit} mode="contained">Save</Button>
+      <Button labelStyle={{ ...myFont }} onPress={handleSubmit} mode="contained">Save</Button>
     </View>
   )
 }

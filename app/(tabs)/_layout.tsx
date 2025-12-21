@@ -2,13 +2,19 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Tabs } from 'expo-router';
 import { useTheme } from 'react-native-paper';
+import { useFonts } from "expo-font"
+import { useMyTheme } from '@/provider/MyThemeProvider';
 export default function TabLayout() {
   const theme = useTheme();
+  const theme2 = useMyTheme();
+  useFonts({
+    Bitter: require('@/assets/fonts/Bitter/Bitter-Medium.ttf'),
+  });
   return (
     <Tabs screenOptions={{
-      tabBarActiveTintColor: theme.colors.primary,
-      tabBarActiveBackgroundColor: theme.colors.background,
-      headerShown : false
+      tabBarActiveTintColor: theme2?.isLight ? theme.colors.primary : "black",
+      headerShown: false,
+      tabBarActiveBackgroundColor: theme2?.isLight ? "white" : "#bfbfbf3d",
     }}>
       <Tabs.Screen
         name="index"
@@ -22,7 +28,9 @@ export default function TabLayout() {
         options={{
           title: 'About',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="info" color={color} />,
+
         }}
+
       />
     </Tabs>
   );
