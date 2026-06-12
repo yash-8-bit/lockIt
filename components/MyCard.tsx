@@ -20,7 +20,7 @@ export default function MyCard({ data, onOpen, onDelete }: {
       </View>
       <View style={{ flexDirection: "row", gap: 2 }}>
         <MyButton  onPress={onOpen} icon={"lock-open"} label='View' />
-        <MyButton onPress={onDelete} icon={"delete"} label='Delete' />
+        <MyButton  onPress={onDelete} icon={"delete"} label='Delete' />
       </View>
     </View>
   )
@@ -28,10 +28,8 @@ export default function MyCard({ data, onOpen, onDelete }: {
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 1.2,
     borderWidth: 0.2,
     padding: 6,
-    borderRadius: 4,
     marginVertical: 6
   },
   title: {

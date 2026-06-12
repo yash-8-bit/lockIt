@@ -1,7 +1,7 @@
 import { useMyTheme } from '@/provider/MyThemeProvider'
 import { about_para } from '@/static/main'
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Text, useTheme, Divider, Switch } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -24,7 +24,7 @@ function about() {
       </View>
       <View style={{ flexDirection: "row", justifyContent: "center", gap: 2 }}>
         <Text style={[styles.font]}>Made by</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => Linking.openURL("https://yash-the-one.vercel.app")}>
           <Text style={[styles.font, { textDecorationLine: "underline", color: "red" }]}>Yash</Text>
         </TouchableOpacity>
       </View>

@@ -20,7 +20,6 @@ export const MyItemForm = ({ onClose }: { onClose: () => void }) => {
   const [form, setform] = useState<FormInterface>(intial)
   const [hidepass, setHidePass] = useState<boolean>(true);
   const handleSubmit = async () => {
-    if (!form.title || !form.password) alert("All input is required");
     const newkey = generatekey(form.title);
     const res = await setItemforKey(form.title.trim(), newkey, form.password);
     if (res.success) onClose();
@@ -29,29 +28,35 @@ export const MyItemForm = ({ onClose }: { onClose: () => void }) => {
   }
   return (
     <View style={{
-      gap: 20, backgroundColor: theme.colors.background,
-      margin: 20, padding: 12, borderRadius: 12
+      gap: 15, backgroundColor: theme.colors.background,
+      margin: 20, padding: 12
     }}>
-      <View style={{ gap: 3 }}>
+      <View style={{ gap: 2 }}>
         <TextInput
-          label="Enter Title"
+          label="Enter Title *"
           mode="outlined"
+          maxLength={20}
+          
           contentStyle={{ ...myFont }}
 
           value={form.title}
           onChangeText={text => setform({ ...form, title: text })}
         />
         <TextInput
-          label="Enter Password"
+          label="Enter Password *"
           mode="outlined"
+          placeholder="minimum 4 character"
           value={form.password}
+          maxLength={20}
           contentStyle={{ ...myFont }}
           secureTextEntry={hidepass}
           right={<TextInput.Icon onPress={() => setHidePass(!hidepass)} icon={hidepass ? "eye" : "eye-off"} />}
           onChangeText={text => setform({ ...form, password: text })}
         />
       </View>
-      <Button labelStyle={{ ...myFont }} onPress={handleSubmit} mode="contained">Save</Button>
+      <Button
+        disabled={(!form.title || !form.password || form.password.length < 4)}
+        style={{ borderRadius: 0 }} labelStyle={{ ...myFont }} onPress={handleSubmit} mode="contained">Save</Button>
     </View>
   )
 }

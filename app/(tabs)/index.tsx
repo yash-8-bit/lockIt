@@ -18,6 +18,7 @@ export default function Index() {
   const [openItem, setOpenitem] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   useEffect(() => {
+    if(!isOpen)
     (async () => {
       const items = await getAllItems();
       setData(items);

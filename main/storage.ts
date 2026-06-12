@@ -22,7 +22,7 @@ export const setItemforKey = (title: string, securekey: string, password: string
             values.push({ id: 1, title, securekey })
         else {
             if (values.find((item) => item.title.trim().toLowerCase() === title.trim().toLowerCase()))
-                return { success: false, message: "title already exist" }
+                return { success: false, message: "Title Already Exist" }
             values.push({ id: values[values.length - 1].id + 1, title, securekey })
         }
         await SecureStore.setItemAsync(securekey, password, {

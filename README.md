@@ -1,19 +1,19 @@
 
-# 🔒 LockIt (Password Vault App)
+# LockIt (Password Vault App)
 
 A secure, biometric-enabled password vault app built using the Expo framework. LockIt allows users to store, view, and delete passwords using biometric authentication (fingerprint or face recognition), and features both light and dark mode support for a customizable experience.
 
-## 🚀 Features
+## Features
 
-* 🔐 **Password Storage**: Safely store and manage your passwords.
-* 📱 **Biometric Authentication**: Unlock, view, and delete passwords with fingerprint or face recognition.
-* 🌗 **Light & Dark Mode**: Automatically switch between light and dark mode based on system preferences.
-* ❌ **Password Deletion**: Securely delete passwords with biometric confirmation.
-* 🔒 **Secure Data Storage**: Data is stored securely, ensuring privacy.
+* **Password Storage**: Safely store and manage your passwords.
+* **Biometric Authentication**: Unlock, view, and delete passwords with fingerprint or face recognition.
+* **Light & Dark Mode**: Automatically switch between light and dark mode based on system preferences.
+* **Password Deletion**: Securely delete passwords with biometric confirmation.
+* **Secure Data Storage**: Data is stored securely, ensuring privacy.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend:
 
@@ -25,7 +25,7 @@ A secure, biometric-enabled password vault app built using the Expo framework. L
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -55,7 +55,7 @@ This will open a page in your browser with a QR code. Scan it using the **Expo G
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](https://github.com/yash-8-bit/lockIt/blob/main/LICENSE).
 
