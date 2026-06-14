@@ -32,7 +32,10 @@ export const setItemforKey = (title: string, securekey: string, password: string
         await AsyncStorage.setItem("storage", JSON.stringify(values));
         return { success: true, message: "Added Successfully" }
     },
-        () => { return ({ success: false, message: "Try Again..." }) })
+        (e: any) => {
+            if (e?.message?.includes("User canceled the authentication")) return;
+            return ({ success: false, message: "Try Again..." })
+        })
 }
 
 
@@ -42,7 +45,8 @@ export const deleteItem = (id: number): Promise<{
     message: string
 }> => {
     return TryCatchFunction(async () => {
-        const res = await LocalAuthentication.authenticateAsync();
+        const res: any = await LocalAuthentication.authenticateAsync();
+        if (res?.error === "user_cancel") return { success: false, message: "User Cancel" }
         if (!res.success) return { success: false, message: "Not Authentic" }
         const values: ItemsInterface[] = JSON.parse(await AsyncStorage.getItem("storage") || "[]");
         const data = values.find((item) => item.id === id)

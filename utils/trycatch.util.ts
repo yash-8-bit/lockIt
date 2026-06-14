@@ -5,8 +5,7 @@ export  const TryCatchFunction = async(callback: Function,
         const result = await callback();
         return result;
     }
-    catch (err) {
-        console.error(err);
-       return onerror?.();
+    catch (e : any) {
+       return onerror?.(e);
     }
 }

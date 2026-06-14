@@ -18,11 +18,11 @@ export default function Index() {
   const [openItem, setOpenitem] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   useEffect(() => {
-    if(!isOpen)
-    (async () => {
-      const items = await getAllItems();
-      setData(items);
-    })()
+    if (!isOpen)
+      (async () => {
+        const items = await getAllItems();
+        setData(items);
+      })()
   }, [isOpen]);
   const closefunction = () => setIsOpen(false);
   const onOpen = async (item: ItemsInterface) => {
@@ -34,6 +34,7 @@ export default function Index() {
   }
   const onDelete = async (id: number) => {
     const res = await deleteItem(id);
+    if (res.message === "User Cancel") return;
     alert(res.message);
     if (res.success)
       setData(data.filter(item => item.id !== id))
@@ -68,7 +69,7 @@ export default function Index() {
           </View>
         </View>
       </MyModal>
-      <View style={{ justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
+      <View style={{ paddingInline: 12, justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
         <Text style={{ ...myFont, opacity: 0.7 }} variant="headlineSmall" >All Saved Password</Text>
         <IconButton
           icon="plus"
@@ -79,9 +80,10 @@ export default function Index() {
       </View>
       {data.length == 0 ?
         <View style={{ flex: 1, justifyContent: "center" }}>
-          <Text style={{ ...myFont, textAlign: "center" }}>Empty Storage</Text>
+          <Text style={{ ...myFont, textAlign: "center" }}>No Saved Passwords Yet</Text>
         </View>
         : <FlatList
+
           data={data}
           renderItem={(({ item }) => <MyCard onDelete={() => onDelete(item.id)} onOpen={() => onOpen(item)} data={item} />)}
         />}
@@ -93,7 +95,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   "container": {
     flex: 1,
-    padding: 12,
     ...myFont
   }
 })

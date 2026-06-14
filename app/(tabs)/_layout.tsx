@@ -12,10 +12,10 @@ export default function TabLayout() {
   });
   return (
     <Tabs screenOptions={{
+      tabBarStyle:{padding:0,margin:0},
       tabBarActiveTintColor: theme2?.isLight ? theme.colors.primary : "black",
       headerShown: false,
-      tabBarActiveBackgroundColor: theme2?.isLight ? "white" : "#bfbfbf3d",
-      
+      tabBarActiveBackgroundColor: theme2?.isLight ? "white" : "#bfbfbf3d"
     }} >
       <Tabs.Screen
         name="index"

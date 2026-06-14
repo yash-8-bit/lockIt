@@ -19,8 +19,10 @@ function about() {
         <Divider />
         <View style={{ gap: 2, flexDirection: "row", alignItems: "center" }}>
           <Text style={[styles.font]}>Switch Theme :</Text>
-          <Switch color='#CA6924' value={theme?.isLight} onValueChange={theme?.change} />
+          <Switch color='#247aca' value={theme?.isLight} onValueChange={theme?.change} />
         </View>
+        <Divider />
+
       </View>
       <View style={{ flexDirection: "row", justifyContent: "center", gap: 2 }}>
         <Text style={[styles.font]}>Made by</Text>
